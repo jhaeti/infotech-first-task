@@ -1,0 +1,39 @@
+<form [formGroup]="postForm">
+  <div class="form-top">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput required />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>User</mat-label>
+        <mat-select formControlName="userId" name="food" required>
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let user of users" [value]="user.value">
+            {{ user.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Body</mat-label>
+      <textarea formControlName="body" matInput required></textarea>
+    </mat-form-field>
+  </div>
+  <div>
+    <button
+      class="full-width"
+      (click)="save()"
+      mat-raised-button
+      color="primary"
+      [disabled]="postForm.invalid"
+    >
+      Save
+    </button>
+  </div>
+</form>

@@ -1,0 +1,26 @@
+.form-top {
+  display: flex;
+  gap: 1.4rem;
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 3.5) {
+    flex-direction: column;
+  }
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.ng-invalid .ng-touched.ng-invalid {
+  border-color: red;
+}
+
+.form-top * {
+  width: 100%;
+}
+.full-width {
+  width: 100%;
+}
+textarea {
+  height: 3rem;
+}
