@@ -15,7 +15,7 @@ export class FormComponent implements OnInit, OnDestroy {
     body: new FormControl(''),
     userId: new FormControl(),
   });
-  userSub: Subscription;
+  usersSub: Subscription;
   users: {
     value: string;
     viewValue: string;
@@ -25,7 +25,7 @@ export class FormComponent implements OnInit, OnDestroy {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.userSub = this.dataService.getUsers().subscribe((users) => {
+    this.usersSub = this.dataService.getUsers().subscribe((users) => {
       this.users = users;
     });
   }
@@ -43,6 +43,6 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.userSub.unsubscribe();
+    this.usersSub.unsubscribe();
   }
 }
