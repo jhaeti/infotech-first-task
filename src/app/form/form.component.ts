@@ -1,30 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DataService } from '../data.service';
 import { PostModel } from '../post.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css'],
 })
-export class FormComponent {
+export class FormComponent implements OnInit, OnDestroy {
   postForm = new FormGroup({
     title: new FormControl(''),
     body: new FormControl(''),
     userId: new FormControl(),
   });
+  userSub: Subscription;
   users: {
     value: string;
     viewValue: string;
-  }[] = [
-    { value: '1', viewValue: 'Ti Jhae' },
-    { value: '2', viewValue: 'Alhassan' },
-    { value: '3', viewValue: 'Tijani' },
-  ];
+  }[];
 
   // Injecting data service
   constructor(private dataService: DataService) {}
+
+  ngOnInit() {
+    this.userSub = this.dataService.getUsers().subscribe((users) => {
+      this.users = users;
+    });
+  }
 
   save() {
     const newPost = new PostModel(
@@ -36,5 +40,9 @@ export class FormComponent {
     this.dataService.sendPost(newPost);
     // Resetting form state
     this.postForm.reset();
+  }
+
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
   }
 }
