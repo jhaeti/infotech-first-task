@@ -13,9 +13,10 @@ import { TableComponent } from './table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { UserCellComponent } from './user-cell/user-cell.component';
 
 @NgModule({
-  declarations: [AppComponent, FormComponent, TableComponent],
+  declarations: [AppComponent, FormComponent, TableComponent, UserCellComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
